@@ -28,11 +28,12 @@ class EixoController extends Controller
      */
     public function store(Request $request)
     {
+        echo($request->name);
         $eixo = new Eixo();
-        $eixo->nome = $request->nome;
-        $eixo->descricao = $request->descricao;
+        $eixo->name = $request->name;
+        $eixo->description = $request->description;
         $eixo->save();
-        return redirect()->route('eixo.index');
+        return redirect()->route('eixo.create');
     }
 
     /**
@@ -52,7 +53,12 @@ class EixoController extends Controller
      */
     public function edit(string $id)
     {
-        
+        $eixo = Eixo::find($id);
+
+        if (isset($eixo)) {
+            return view('eixo.edit', compact(['eixo']));
+        }
+        return "<H1>DEU MERDA PILANTRAKKKKKKKKKKKKKKKKKKKK!</H1>";
     }
 
     /**
@@ -62,8 +68,8 @@ class EixoController extends Controller
     {
         $eixo = Eixo::find($id);
         if(isset($eixo)){
-            $eixo->nome = $request->nome;
-            $eixo->descricao = $request->descricao;
+            $eixo->name = $request->name;
+            $eixo->description = $request->description;
             $eixo->save();
             return redirect()->route(('eixo.index'));
         }

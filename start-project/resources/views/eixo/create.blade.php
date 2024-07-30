@@ -13,8 +13,8 @@
     <hr>
     <form action="{{route('eixo.store')}}" method="POST">
         @csrf
-        <input type="text" name="nome"><br>
-        <textarea name="descricao" id="" cols="40" rows="5"></textarea><br>
+        <input type="text" name="name"><br>
+        <textarea name="description" cols="40" rows="5"></textarea><br>
         <input type="submit" value="Salvar">
     </form>
 </body>

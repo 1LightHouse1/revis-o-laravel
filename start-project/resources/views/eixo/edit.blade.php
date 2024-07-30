@@ -14,8 +14,8 @@
     <form action="{{route('eixo.update', $eixo->id)}}" method="POST">
         @csrf
         @method('PUT')
-        <input type="text" name="nome" value="{{$eixo->nome}}"><br>
-        <textarea name="descricao" id="" cols="40" rows="5" value="{{$eixo->descricao}}"></textarea><br>
+        <input type="text" name="name" value="{{$eixo->name}}"><br>
+        <textarea name="description" cols="40" rows="5">{{$eixo->description}}</textarea><br>
         <input type="submit" value="Salvar">
     </form>
 </body>
