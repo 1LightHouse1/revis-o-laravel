@@ -81,6 +81,12 @@ class EixoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $eixo = Eixo::find($id);
+        if (isset($eixo)) {
+            $eixo->delete();
+            return redirect()->route('eixo.index'); # code...
+        }
+        return '<h1>EIXO NAO ENCONTRADO</h1>';
     }
+
 }

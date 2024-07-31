@@ -2,12 +2,14 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
     <title>Alterar Eixo</title>
 </head>
 <body>
-    <h1>Alterar Eixo</h1>
+    @extends('template.main',[ "title"=> "Alterar eixo", "header"=>"Modificar Eixo"])
+@section('content')
     <hr>
     <a href="{{route('eixo.index')}}">Voltar</a>
     <hr>
@@ -18,5 +20,6 @@
         <textarea name="description" cols="40" rows="5">{{$eixo->description}}</textarea><br>
         <input type="submit" value="Salvar">
     </form>
+@endsection
 </body>
 </html>

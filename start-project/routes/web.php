@@ -20,3 +20,4 @@ Route::get('/', function () {
 Route::get('/eixo', 'App\Http\Controllers\EixoController@index');
 
 Route::resource('/eixo', 'App\Http\Controllers\EixoController');
+

@@ -30,6 +30,13 @@
                     <td>
                         <a href="{{route('eixo.edit', $item->id)}}">Alterar</a>
                     </td>
+                    <td>
+                        <form action="{{route('eixo.destroy', $item->id)}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" value="Remover">
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
