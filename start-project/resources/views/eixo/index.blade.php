@@ -31,12 +31,16 @@
                         <a href="{{route('eixo.edit', $item->id)}}">Alterar</a>
                     </td>
                     <td>
+                        <a href="{{asset('storage'."/".$item->url)}}" target="_blank">arquivo</a>
+                    </td>
+                    <td>
                         <form action="{{route('eixo.destroy', $item->id)}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <input type="submit" value="Remover">
                         </form>
                     </td>
+                    <a href="{{route('report')}}" target="_blank">Relátório</a>
                 </tr>
             @endforeach
         </tbody>

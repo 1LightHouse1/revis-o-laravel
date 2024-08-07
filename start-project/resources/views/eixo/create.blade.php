@@ -11,10 +11,11 @@
     <hr>
     <a href="{{route('eixo.index')}}">Voltar</a>
     <hr>
-    <form action="{{route('eixo.store')}}" method="POST">
+    <form action="{{route('eixo.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <input type="text" name="name"><br>
         <textarea name="description" cols="40" rows="5"></textarea><br>
+        <input type="file" id="documento" name="documento">
         <input type="submit" value="Salvar">
     </form>
 </body>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Eixo;
+use Illuminate\Support\Facades\Storage;
+use Dompdf\Dompdf;
 
 class EixoController extends Controller
 {
@@ -12,6 +14,7 @@ class EixoController extends Controller
      */
     public function index(){
         $data = Eixo::all();
+        Storage::disk('local')->put('example.txt', 'Contents');
         return view('eixo.index', compact('data'));        
     }
 
@@ -28,12 +31,20 @@ class EixoController extends Controller
      */
     public function store(Request $request)
     {
-        echo($request->name);
-        $eixo = new Eixo();
-        $eixo->name = $request->name;
-        $eixo->description = $request->description;
-        $eixo->save();
-        return redirect()->route('eixo.create');
+        if($request->hasFile('documento')){
+            $eixo = new Eixo();
+            $eixo->name = $request->name;
+            $eixo->description = $request->description;
+            $eixo->save();
+            $ext = $request->file('documento')->getClientOriginalExtension();
+            $nome_arq = $eixo->id . "_" . time() . "." . $ext;
+            $request->file('documento')->storeAs("public/", $nome_arq);
+            $eixo->url = $nome_arq;
+            $eixo->id;
+            $eixo->save();
+
+            return redirect()->route('eixo.create');
+        }
     }
 
     /**
@@ -87,6 +98,22 @@ class EixoController extends Controller
             return redirect()->route('eixo.index'); # code...
         }
         return '<h1>EIXO NAO ENCONTRADO</h1>';
+    }
+
+    public function test() {
+
+        $data = Eixo::all();
+        
+        // Instancia um Objeto da Classe Dompdf
+        $dompdf = new Dompdf();
+        // Carrega o HTML
+        $dompdf->loadHtml('hello world');
+        // (Opcional) Configura o Tamanho e Orientação da Página
+        $dompdf->setPaper('A4', 'landscape');
+        // Converte o HTML em PDF
+        $dompdf->render();
+        // Serializa o PDF para Navegador
+        $dompdf->stream();
     }
 
 }
